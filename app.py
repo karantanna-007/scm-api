@@ -7,6 +7,10 @@ app = FastAPI()
 app.add_middleware(CORSMiddleware,
     allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
+@app.get("/")
+def root():
+    return {"status": "SCM API is running", "endpoint": "/query?q=your question"}
+
 # Load CSV once when server starts
 df = pd.read_csv("supplier_performance_data.csv")
 df["Region"] = df["Region"].fillna("NA")
